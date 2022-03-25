@@ -14,30 +14,43 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
+    @livewireStyles
+
     <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
 </head>
 
-<body class="bg-gray-100">
-
+<body class="font-sans antialiased">
     <x-impersonating-banner />
-    @include('guest-navigation-menu')
+    <x-jet-banner />
 
-    <!-- Page Heading -->
-    @if (isset($header))
-    <header class="bg-white shadow">
-        <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
-            {{ $header }}
-        </div>
-    </header>
-    @endif
 
-    <div class="relative flex justify-center min-h-screen py-4 my-4 font-sans antialiased bg-gray-100 items-top dark:bg-gray-900 sm:pt-0">
+    <div {{-- x-data="{sidebarOpen: false}" --}} class="min-h-screen bg-gray-100">
+
+        {{--
+        <x-sidebar-menu /> --}}
+
+        @include('guest-navigation-menu')
+
+        <!-- Page Heading -->
+        @if (isset($header))
+        <header class="bg-white shadow">
+            <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                {{ $header }}
+            </div>
+        </header>
+        @endif
+
+        <!-- Page Content -->
+        <main>
             {{ $slot }}
-        </div>
+        </main>
+    </div>
 
-        @stack('modals')
+    @stack('modals')
+    @stack('scripts')
 
-        @livewireScripts
-    </body>
+    @livewireScripts
+</body>
+
 </html>

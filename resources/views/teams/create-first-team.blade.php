@@ -9,7 +9,7 @@
             {{ __('Create Organization') }}
         </h2>
     </x-slot>
-    <div>
+    <div class="mx-auto sm:px-6 lg:px-8 max-w-7xl">
         <div class="px-4 py-3 text-indigo-900 bg-gray-100 border-t-4 border-indigo-500 rounded-b shadow-md"
             role="alert">
             <div class="flex">
@@ -26,15 +26,15 @@
                 </div>
             </div>
         </div>
-        <div class="py-10 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="py-10 mx-auto max-w-7xl">
             <div role="alert">
                 <div class="px-4 py-2 font-bold text-white bg-red-500 rounded-t">
                     Membership Required.
                 </div>
-                <div class="px-4 py-3 text-red-700 bg-red-100 border border-t-0 border-red-400 rounded-b">
+                <div class="px-4 py-2 text-red-700 bg-red-100 border border-t-0 border-red-400 rounded-b">
                     <p>You must be an upgraded member to access this part of the application</p>
                     <div class="flex items-center justify-end p-2">
-                        <a href="{{ route('guest-iframe.billing') }}">
+                        <a href="{{ route('billing') }}">
                             <x-jet-secondary-button>
                                 {{ __('Upgrade') }}
                             </x-jet-secondary-button>

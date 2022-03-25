@@ -2,7 +2,7 @@
     <x-jet-authentication-card>
         <x-slot name="logo">
             <a href="/">
-                <x-application-logo class="w-16 h-16" />
+                <x-application-logo class="w-full h-auto"/>
             </a>
         </x-slot>
 

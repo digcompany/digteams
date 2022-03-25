@@ -28,15 +28,8 @@ Route::get('/', function () {
 Route::post('/',[ComingSoonController::class, 'send'])->name('coming-soon.send');
 
 Route::any('/billing',function(){
-    $value = config('billing');
-    $dt = Carbon::create($value['snw_year'], $value['snw_month'], $value['snw_day'], $value['snw_hours'] , $value['snw_minutes'],$value['snw_seconds']);
-    return view('comingsoon::comingsoon',compact('value','dt'));
+    return view('subscribe');
 })->name('billing');
-
-Route::any('/guest-iframe/billing',function(){
-
-    return view('iframes::jetstream.guest-iframe',['iframeSource' => '/billing']);
-})->name('guest-iframe.billing');
 
 $authMiddleware = config('jetstream.guard')
 ? 'auth:'.config('jetstream.guard')

@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-guest-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
             {{ __('Subscribe') }}
@@ -17,4 +17,4 @@
     @push('scripts')
     <script src="https://js.strip.com/v3/"></script>
     @endpush
-</x-app-layout>
+</x-guest-layout>
