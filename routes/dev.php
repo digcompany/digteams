@@ -1,12 +1,7 @@
 <?php
 
-use App\Http\Controllers\DocsController;
-use App\Http\Controllers\ImpersonateController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
-use Softnweb\ComingSoon\Http\Controllers\ComingSoonController;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /*
 |--------------------------------------------------------------------------
