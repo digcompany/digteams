@@ -53,7 +53,3 @@ Route::group(['middleware' => [$authMiddleware, 'has_team', 'verified']], functi
         return view('dashboard');
     })->name('dashboard');
 });
-
-Route::get('/contact', function () {
-    abort(404);
-});
