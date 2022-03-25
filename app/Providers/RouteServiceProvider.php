@@ -38,6 +38,12 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/jetstream.php'));
+
+            if (app()->environment('local')) {
+                Route::middleware('web')
+                    ->prefix('dev')
+                    ->group(base_path('routes/dev.php'));
+            }
         });
     }
 

@@ -54,18 +54,6 @@ Route::group(['middleware' => [$authMiddleware, 'has_team', 'verified']], functi
     })->name('dashboard');
 });
 
-
-
-
-
-Route::middleware(['auth:web', 'charter.user'])->get('/id', function (Request $request) {
-    dd(auth());
-})->name('id');
-
-Route::get('memberships/{membership}', function (\App\Models\Membership $membership) {
-    return $membership->toJson();
-});
-
 Route::get('/contact', function () {
     abort(404);
 });
