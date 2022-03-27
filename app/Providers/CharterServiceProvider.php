@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Actions\Charter\CreateLink;
 use App\Actions\Charter\DeleteLink;
+use App\Actions\Charter\SubscribeByPromoCode;
 use App\Actions\Charter\UpdateCurrentTeam;
 use App\Actions\Charter\UpdateLink;
 use App\Actions\Charter\UpdateTeamDomain;
@@ -21,6 +22,7 @@ class CharterServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Charter::subscribeByPromoCodeUsing(SubscribeByPromoCode::class);
         Charter::updateUserTypesUsing(UpdateUserType::class);
         Charter::updateCurrentTeamsUsing(UpdateCurrentTeam::class);
         Charter::updateTeamLogosUsing(UpdateTeamLogo::class);

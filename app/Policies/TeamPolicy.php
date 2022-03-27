@@ -46,7 +46,8 @@ class TeamPolicy
             $user->type === UserType::SuperAdmin ||
             $user->type === UserType::Admin ||
             $user->type === UserType::UpgradedUser ||
-            $user->subscribed('default');
+            $user->subscribed('default') ||
+            $user->onTrial();
     }
 
     /**

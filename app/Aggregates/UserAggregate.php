@@ -7,6 +7,7 @@ use App\StorableEvents\UserCreated;
 use App\StorableEvents\UserDeleted;
 use App\StorableEvents\UserPasswordUpdated;
 use App\StorableEvents\UserProfileUpdated;
+use App\StorableEvents\UserPromoCodeEntered;
 use App\StorableEvents\UserSwitchedTeam;
 use App\StorableEvents\UserTypeUpdated;
 use Spatie\EventSourcing\AggregateRoots\AggregateRoot;
@@ -108,6 +109,19 @@ class UserAggregate extends AggregateRoot
             new UserTypeUpdated(
                 userUuid: $this->uuid(),
                 userType: $type,
+            )
+        );
+
+        return $this;
+    }
+
+    public function subscribeUserByPromoCode(
+        string $promoCode,
+    ) {
+        $this->recordThat(
+            new UserPromoCodeEntered(
+                userUuid: $this->uuid(),
+                promoCode: $promoCode,
             )
         );
 

@@ -2,8 +2,10 @@
 
 namespace App;
 
+use App\Actions\Charter\SubscribeByPromoCode;
 use App\Contracts\CreatesLink;
 use App\Contracts\DeletesLink;
+use App\Contracts\SubscribesByPromoCode;
 use App\Contracts\UpdatesCurrentTeam;
 use App\Contracts\UpdatesLink;
 use App\Contracts\UpdatesTeamDomains;
@@ -16,6 +18,17 @@ use Illuminate\Http\Request;
 
 class Charter
 {
+    /**
+     * Register a class / callback that should be used to subscribe by promo code.
+     *
+     * @param  string  $callback
+     * @return void
+     */
+    public static function subscribeByPromoCodeUsing(string $callback)
+    {
+        app()->singleton(SubscribesByPromoCode::class, $callback);
+    }
+
     /**
      * Register a class / callback that should be used to create a link.
      *

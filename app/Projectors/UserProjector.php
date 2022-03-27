@@ -11,9 +11,11 @@ use App\StorableEvents\UserCreated;
 use App\StorableEvents\UserDeleted;
 use App\StorableEvents\UserPasswordUpdated;
 use App\StorableEvents\UserProfileUpdated;
+use App\StorableEvents\UserPromoCodeEntered;
 use App\StorableEvents\UserSwitchedTeam;
 use App\StorableEvents\UserTypeUpdated;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -21,6 +23,15 @@ use Spatie\EventSourcing\EventHandlers\Projectors\Projector;
 
 class UserProjector extends Projector
 {
+    public function onUserPromoCodeEntered(UserPromoCodeEntered $event)
+    {
+        $user = User::whereUuid($event->userUuid)->firstOrFail();
+
+        $user->forceFill([
+            'trial_ends_at' => $event->createdAt()->addDays(config('charter.trial_days')),
+        ])->save();
+    }
+
     public function onMainUserUpdated(MainUserUpdated $event)
     {
         $mainUser = User::whereUuid($event->userUuid)->firstOrFail();

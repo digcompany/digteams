@@ -23,7 +23,7 @@ Route::get('/docs/{file?}', [DocsController::class, 'index'])->name('docs.index'
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::post('/',[ComingSoonController::class, 'send'])->name('coming-soon.send');
 
