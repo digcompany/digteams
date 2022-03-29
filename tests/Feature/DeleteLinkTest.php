@@ -32,6 +32,6 @@ class DeleteLinkTest extends TestCase
             'team_id' => $user->currentTeam->id,
             'user_id' => $user->id,
             'url' => 'https://example.com',
-        ]);
+        ], $link->getConnectionName());
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Laravel\Cashier\Cashier;
+use Laravel\Sanctum\Sanctum;
 use Laravel\Telescope\Telescope;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,6 +17,8 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         Telescope::ignoreMigrations();
+        Cashier::ignoreMigrations();
+        Sanctum::ignoreMigrations();
     }
 
     /**

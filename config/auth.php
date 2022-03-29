@@ -90,6 +90,7 @@ return [
         'users' => [
             'provider' => 'users',
             'table' => 'password_resets',
+            'connection' => 'landlord',
             'expire' => 60,
             'throttle' => 60,
         ],

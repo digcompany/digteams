@@ -8,4 +8,6 @@ return [
     ],
 
     'db_connection' => 'landlord',
+
+    'migration_path' => 'database/migrations/landlord',
 ];

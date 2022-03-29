@@ -41,7 +41,7 @@ class CreateLinkTest extends TestCase
             'title' => 'Example',
             'label' => 'Example',
             'view' => 'navigation-menu',
-        ]);
+        ], (new Link())->getConnectionName());
     }
 
     public function test_creating_link_requires_validation()
@@ -66,7 +66,7 @@ class CreateLinkTest extends TestCase
             'url' => '',
             'title' => '',
             'label' => '',
-        ]);
+        ], (new Link)->getConnectionName());
     }
 
     public function test_null_link_type_will_create_internal_link()
@@ -91,7 +91,7 @@ class CreateLinkTest extends TestCase
             'url' => 'https://example.com',
             'title' => 'Example',
             'label' => 'Example',
-        ]);
+        ], (new Link())->getConnectionName());
     }
 
     public function test_creating_link_requires_authorization()
@@ -118,7 +118,7 @@ class CreateLinkTest extends TestCase
             'url' => 'https://example.com',
             'title' => 'Example',
             'label' => 'Example',
-        ]);
+        ], (new Link())->getConnectionName());
 
 
         // try to create a link as a admin
@@ -131,7 +131,7 @@ class CreateLinkTest extends TestCase
             'url' => 'https://example.com',
             'title' => 'Example',
             'label' => 'Example',
-        ]);
+        ], (new Link)->getConnectionName());
     }
 
     protected function createLink()

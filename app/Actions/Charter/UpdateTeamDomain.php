@@ -23,7 +23,7 @@ class UpdateTeamDomain implements UpdatesTeamDomains
         Gate::forUser($user)->authorize('update', $team);
 
         Validator::make($input, [
-            'domain' => ['required', 'string',Rule::unique('teams')->ignore($team->uuid, 'uuid'), 'max:255'],
+            'domain' => ['required', 'string',Rule::unique('landlord.teams')->ignore($team->uuid, 'uuid'), 'max:255'],
         ])->validateWithBag('updateTeamDomain');
 
         TeamAggregate::retrieve(

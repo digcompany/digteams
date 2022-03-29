@@ -23,7 +23,7 @@ class UpdateTeamName implements UpdatesTeamNames
         Gate::forUser($user)->authorize('update', $team);
 
         Validator::make($input, [
-            'name' => ['required', 'string', 'max:255', Rule::unique('teams')->ignore($team->uuid, 'uuid')],
+            'name' => ['required', 'string', 'max:255', Rule::unique('landlord.teams')->ignore($team->uuid, 'uuid')],
         ])->validateWithBag('updateTeamName');
 
         TeamAggregate::retrieve(

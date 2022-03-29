@@ -25,8 +25,6 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::post('/',[ComingSoonController::class, 'send'])->name('coming-soon.send');
-
 Route::any('/billing',function(){
     return view('subscribe');
 })->name('billing');

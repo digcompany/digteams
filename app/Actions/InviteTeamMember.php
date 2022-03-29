@@ -76,7 +76,7 @@ class InviteTeamMember implements InvitesTeamMembers
     protected function rules($team)
     {
         return array_filter([
-            'email' => ['required', 'email', Rule::unique('team_invitations')->where(function ($query) use ($team) {
+            'email' => ['required', 'email', Rule::unique('landlord.team_invitations')->where(function ($query) use ($team) {
                 $query->where('team_id', $team->id);
             })],
             'role' => Jetstream::hasRoles()

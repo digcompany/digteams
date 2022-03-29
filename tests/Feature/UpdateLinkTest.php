@@ -41,7 +41,7 @@ class UpdateLinkTest extends TestCase
             'title' => 'Example Updated',
             'label' => 'Example Updated',
             'view' => 'navigation-menu',
-        ]);
+        ], $link->getConnectionName());
     }
 
     public function test_updating_a_link_requires_validation()
@@ -98,14 +98,14 @@ class UpdateLinkTest extends TestCase
             'team_id' => $user->currentTeam->id,
             'user_id' => $user->id,
             'url' => 'https://example.com',
-        ]);
+        ], $link->getConnectionName());
 
         $this->assertDatabaseMissing('links', [
             'id' => $link->id,
             'team_id' => $user->currentTeam->id,
             'user_id' => $user->id,
             'url' => 'https://example.com/updated',
-        ]);
+        ], $link->getConnectionName());
 
 
         //try to update the link acting th adminTeamMember
@@ -125,6 +125,6 @@ class UpdateLinkTest extends TestCase
             'team_id' => $user->currentTeam->id,
             'user_id' => $user->id,
             'url' => 'https://example.com/updated',
-        ]);
+        ], $link->getConnectionName());
     }
 }

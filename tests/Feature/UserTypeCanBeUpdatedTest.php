@@ -37,6 +37,6 @@ class UserTypeCanBeUpdatedTest extends TestCase
 
         $this->assertDatabaseHas('users', [
             'type' => UserType::Admin->value,
-        ]);
+        ], $user->getConnectionName());
     }
 }

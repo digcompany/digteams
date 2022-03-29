@@ -2,25 +2,30 @@
 
 namespace Tests\Feature;
 
+use App\Models\Team;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Models\UserType;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Jetstream\Http\Livewire\CreateTeamForm;
 use Livewire\Livewire;
 use Tests\TestCase;
 
 class UserCanCreateFirstTeamTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function test_first_team_can_be_created()
     {
-        $this->actingAs(User::factory()->create());
+        $this->actingAs(User::factory()->create([
+            'type' => UserType::UpgradedUser,
+        ]));
 
-        $component = Livewire::test('teams.create-team-form')->set('state.name', 'First Team')->call('createTeam');
+        $this->withExceptionHandling();
+
+        $component = Livewire::test(CreateTeamForm::class)->set('state.name', 'First Team')->call('createTeam');
 
         $this->assertDatabaseHas('teams', [
             'name' => 'First Team',
-        ]);
+        ], (new Team())->getConnectionName());
 
-        $this->assertTrue(auth()->user()->isMemberOfATeam());
+        $this->assertTrue(Auth::user()->fresh()->isMemberOfATeam());
     }
 }

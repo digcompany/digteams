@@ -25,7 +25,7 @@ class DeleteLink implements DeletesLink
         Gate::forUser($user)->authorize('delete', $link);
 
         Validator::make(['uuid' => $uuid], [
-            'uuid' => 'required|exists:links,uuid',
+            'uuid' => 'required|exists:landlord.links,uuid',
         ])->validate();
 
         $linkAggregate = LinkAggregate::retrieve($link->uuid);
