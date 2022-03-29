@@ -6,6 +6,8 @@ use Laravel\Jetstream\Membership as JetstreamMembership;
 
 class Membership extends JetstreamMembership
 {
+    use UsesLandlordConnection;
+
     /**
      * Indicates if the IDs are auto-incrementing.
      *

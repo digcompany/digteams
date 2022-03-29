@@ -81,17 +81,17 @@ class UserProjector extends Projector
     {
         $user = User::whereUuid($event->userUuid)->first();
 
-        if (
-            $event->email !== $user->email &&
-            $user instanceof MustVerifyEmail
-        ) {
-            $this->updateVerifiedUser($user, $event);
-        } else {
+        // if (
+        //     $event->email !== $user->email &&
+        //     $user instanceof MustVerifyEmail
+        // ) {
+        //     $this->updateVerifiedUser($user, $event);
+        // } else {
             $user->forceFill([
                 'name' => $event->name,
                 'email' => $event->email,
             ])->save();
-        }
+        // }
     }
 
     public function onUserPasswordUpdated(UserPasswordUpdated $event)

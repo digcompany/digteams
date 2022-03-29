@@ -3,6 +3,7 @@
 namespace App\Projectors;
 
 use App\Models\Team;
+use App\Models\TeamInvitation;
 use App\Models\User;
 use App\StorableEvents\TeamCreated;
 use App\StorableEvents\TeamDeleted;
@@ -48,7 +49,13 @@ class TeamProjector extends Projector implements ShouldQueue
     {
         $team = Team::whereUuid($event->teamUuid)->firstOrFail();
 
-        $team->teamInvitations()->create([
+        // $invitation = TeamInvitation::firtstOrNew(['uuid' => $event->invitationUuid],[
+        //     'email' => $event->email,
+        //     'role' => $event->role,
+        //     'uuid' => $event->invitationUuid,
+        // ]);
+
+        $team->teamInvitations()->firstOrCreate(['team_id' => $team->id, 'email' => $event->email],[
             'email' => $event->email,
             'role' => $event->role,
             'uuid' => $event->invitationUuid,

@@ -15,6 +15,7 @@ class Team extends JetstreamTeam
 {
     use HasFactory;
     use HasProfilePhoto;
+    use UsesLandlordConnection;
 
     /**
      * The attributes that should be cast.

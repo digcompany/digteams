@@ -26,6 +26,7 @@ class User extends Authenticatable
     use GeneratesUuid;
     use Impersonate;
     use Billable;
+    use UsesLandlordConnection;
 
     /**
      * The attributes that are mass assignable.

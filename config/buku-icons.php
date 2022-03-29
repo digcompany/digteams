@@ -7,5 +7,5 @@ return [
         'web',
     ],
 
-    'db_connection' => env('DB_CONNECTION', 'mysql'),
+    'db_connection' => 'landlord',
 ];

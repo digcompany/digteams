@@ -14,6 +14,7 @@ class Link extends Model
     use BindsOnUuid;
     use GeneratesUuid;
     use HasChildren;
+    use UsesLandlordConnection;
 
     protected $casts = [
         'type' => LinkType::class,

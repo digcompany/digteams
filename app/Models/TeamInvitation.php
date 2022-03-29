@@ -7,6 +7,8 @@ use Laravel\Jetstream\TeamInvitation as JetstreamTeamInvitation;
 
 class TeamInvitation extends JetstreamTeamInvitation
 {
+    use UsesLandlordConnection;
+
     /**
      * The attributes that are mass assignable.
      *
