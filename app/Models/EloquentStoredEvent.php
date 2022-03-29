@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent as SpatieEloquentStoredEvent;
 use Spatie\EventSourcing\StoredEvents\StoredEvent;
@@ -35,29 +33,32 @@ class EloquentStoredEvent extends SpatieEloquentStoredEvent
 
     protected function getOwnerUuid(): ?string
     {
-        if(!isset(Auth::user()->currentTeam)) {
+        if (! isset(Auth::user()->currentTeam)) {
             return null;
         }
         $user = Auth::user();
-        if($user->ownsTeam($user->currentTeam)) {
+        if ($user->ownsTeam($user->currentTeam)) {
             return $user->uuid;
         }
+
         return $user->currentTeam->owner->uuid;
     }
 
     protected function getTeamUuid(): ?string
     {
-        if(!isset(Auth::user()->currentTeam)) {
+        if (! isset(Auth::user()->currentTeam)) {
             return null;
         }
+
         return Auth::user()->currentTeam->uuid;
     }
 
     protected function getUserUuid(): ?string
     {
-        if(!isset(Auth::user()->uuid)) {
+        if (! isset(Auth::user()->uuid)) {
             return null;
         }
+
         return Auth::user()->uuid;
     }
 }

@@ -55,7 +55,7 @@ class TeamProjector extends Projector implements ShouldQueue
         //     'uuid' => $event->invitationUuid,
         // ]);
 
-        $team->teamInvitations()->firstOrCreate(['team_id' => $team->id, 'email' => $event->email],[
+        $team->teamInvitations()->firstOrCreate(['team_id' => $team->id, 'email' => $event->email], [
             'email' => $event->email,
             'role' => $event->role,
             'uuid' => $event->invitationUuid,

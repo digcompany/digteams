@@ -28,7 +28,6 @@ class LandlordEventReplayCommand extends Command
      */
     public function handle()
     {
-
         $this->call('event-sourcing:replay', [
             'projector' => config('landlord.event_projectors'),
             '--from' => $this->option('from'),

@@ -4,13 +4,11 @@ namespace Tests\Feature;
 
 use App\Http\Livewire\EnterPromoCodeForm;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
 
 class UsersCanSubscribeByPromoCodeTest extends TestCase
 {
-
     /**
      * A basic feature test example.
      *

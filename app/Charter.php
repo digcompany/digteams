@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Actions\Charter\SubscribeByPromoCode;
 use App\Contracts\CreatesLink;
 use App\Contracts\DeletesLink;
 use App\Contracts\SubscribesByPromoCode;

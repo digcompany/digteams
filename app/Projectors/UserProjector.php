@@ -15,7 +15,6 @@ use App\StorableEvents\UserPromoCodeEntered;
 use App\StorableEvents\UserSwitchedTeam;
 use App\StorableEvents\UserTypeUpdated;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -87,7 +86,7 @@ class UserProjector extends Projector
         // ) {
         //     $this->updateVerifiedUser($user, $event);
         // } else {
-            $user->forceFill([
+        $user->forceFill([
                 'name' => $event->name,
                 'email' => $event->email,
             ])->save();
