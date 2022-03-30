@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Contracts\CreatesDatabase;
 use App\Contracts\CreatesLink;
 use App\Contracts\DeletesLink;
 use App\Contracts\SubscribesByPromoCode;
@@ -17,6 +18,17 @@ use Illuminate\Http\Request;
 
 class Charter
 {
+    /**
+     * Register a class / callback that should be used to create a database.
+     *
+     * @param  string  $callback
+     * @return void
+     */
+    public static function createDatabasesUsing(string $callback)
+    {
+        app()->singleton(CreatesDatabase::class, $callback);
+    }
+
     /**
      * Register a class / callback that should be used to subscribe by promo code.
      *

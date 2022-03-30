@@ -13,15 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('teams', function (Blueprint $table) {
-            $table->uuid();
+        Schema::create('team_databases', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->index();
+            $table->uuid('uuid')->unique();
             $table->string('name');
-            $table->string('domain')->nullable();
-            $table->foreignId('team_database_id')->nullable()->index();
-            $table->boolean('personal_team');
-            $table->string('profile_photo_path', 2048)->nullable();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('teams');
+        Schema::dropIfExists('team_databases');
     }
 };

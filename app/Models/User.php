@@ -88,4 +88,9 @@ class User extends Authenticatable
     {
         return $this->allTeams()->count() > 0;
     }
+
+    public function teamDatabases()
+    {
+        return $this->hasMany(TeamDatabase::class);
+    }
 }

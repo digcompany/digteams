@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Actions\Charter\CreateDatabase;
 use App\Actions\Charter\CreateLink;
 use App\Actions\Charter\DeleteLink;
 use App\Actions\Charter\SubscribeByPromoCode;
@@ -22,6 +23,7 @@ class CharterServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Charter::createDatabasesUsing(CreateDatabase::class);
         Charter::subscribeByPromoCodeUsing(SubscribeByPromoCode::class);
         Charter::updateUserTypesUsing(UpdateUserType::class);
         Charter::updateCurrentTeamsUsing(UpdateCurrentTeam::class);

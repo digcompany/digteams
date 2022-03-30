@@ -51,7 +51,7 @@ class Team extends JetstreamTeam
     public function configure()
     {
         config([
-            'database.connections.team.database' => $this->database_name,
+            'database.connections.team.database' => $this->teamDatabase->name,
         ]);
 
         DB::purge('team');
@@ -70,5 +70,10 @@ class Team extends JetstreamTeam
         app()->instance('team', $this);
 
         return $this;
+    }
+
+    public function teamDatabase()
+    {
+        return $this->belongsTo(TeamDatabase::class);
     }
 }
