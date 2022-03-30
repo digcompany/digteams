@@ -1421,6 +1421,9 @@ select {
 .w-64 {
   width: 16rem;
 }
+.w-1\/4 {
+  width: 25%;
+}
 .min-w-0 {
   min-width: 0px;
 }

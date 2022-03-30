@@ -7,6 +7,7 @@ use App\Models\TeamDatabase;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\DB;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -18,7 +19,7 @@ class TeamDatabaseCanBeCreatedTest extends TestCase
         $this->actingAs(User::factory()->create());
 
         $component = Livewire::test(CreateDatabaseForm::class)->set('state', [
-            'name' => 'Test Database',
+            'name' => 'test_database',
         ])->call('createDatabase');
 
         $this->assertDatabaseHas('team_databases', [

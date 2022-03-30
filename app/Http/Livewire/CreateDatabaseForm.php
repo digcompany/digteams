@@ -12,6 +12,10 @@ class CreateDatabaseForm extends Component
 
     public $creatingNewDatabase = false;
 
+    protected $listeners = [
+        'showCreateDatabaseModal' => 'showForm',
+    ];
+
     public function createDatabase(CreatesDatabase $creator)
     {
         $this->resetErrorBag();

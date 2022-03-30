@@ -22,15 +22,34 @@
         </div>
 
         <div class="col-span-6 sm:col-span-4">
+            <x-jet-label for="team_database_id" value="{{ __('Database') }}" />
+            <div class="inline-flex flex-row items-center w-full space-x-2">
+                <x-select id="team_database_id" class="block w-full mt-1" wire:model.defer="state.team_database_id">
+
+                    @foreach(\App\Models\TeamDatabase::all() as $database)
+                    <option value="{{ $database->id }}">{{ $database->name }}</option>
+                    @endforeach
+
+                </x-select>
+                <x-jet-nav-link wire:click="$emit('showCreateDatabaseModal')" class="w-1/3 cursor-pointer">
+                   {{ __('Add Database') }}
+                </x-jet-nav-link>
+            </div>
+            <x-jet-input-error for="state.team_database_id" class="mt-2" />
+        </div>
+
+        <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="name" value="{{ __('Organization Name') }}" />
             <x-jet-input id="name" type="text" class="block w-full mt-1" wire:model.defer="state.name" autofocus />
             <x-jet-input-error for="name" class="mt-2" />
         </div>
+        @livewire('create-database-form')
     </x-slot>
 
     <x-slot name="actions">
         <x-jet-button>
-            {{ __('Create') }}
+            {{ __('Save') }}
         </x-jet-button>
     </x-slot>
 </x-jet-form-section>
+
