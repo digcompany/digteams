@@ -8,10 +8,11 @@ use Spatie\EventSourcing\Enums\MetaData;
 use Spatie\EventSourcing\EventSerializers\EventSerializer;
 use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent;
 use Spatie\EventSourcing\StoredEvents\Repositories\EloquentStoredEventRepository as SpatieEloquentStoredEventRepository;
+use Spatie\EventSourcing\StoredEvents\Repositories\StoredEventRepository;
 use Spatie\EventSourcing\StoredEvents\ShouldBeStored;
 use Spatie\EventSourcing\StoredEvents\StoredEvent;
 
-class EloquentStoredEventRepository extends SpatieEloquentStoredEventRepository
+class EloquentStoredEventRepository extends SpatieEloquentStoredEventRepository implements StoredEventRepository
 {
     public function persist(ShouldBeStored $event, string $uuid = null): StoredEvent
     {
