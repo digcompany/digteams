@@ -36,7 +36,7 @@
                    {{ __('Add Database') }}
                 </x-jet-nav-link>
             </div>
-            <x-jet-input-error for="state.team_database_id" class="mt-2" />
+            <x-jet-input-error for="team_database_uuid" class="mt-2" />
         </div>
 
         <div class="col-span-6 sm:col-span-4">

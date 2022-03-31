@@ -71,7 +71,8 @@ class UserProjector extends Projector
             $this->withPersonalTeam(
                 userUuid: $user->uuid,
                 userName: $user->name,
-                teamUuid: $teamUuid
+                teamUuid: $teamUuid,
+                teamDatabaseUuid: $event->teamDatabaseUuid,
             );
         }
     }
@@ -128,7 +129,7 @@ class UserProjector extends Projector
         $user->sendEmailVerificationNotification();
     }
 
-    private function withPersonalTeam($userUuid, $userName, $teamUuid, $teamName = null)
+    private function withPersonalTeam($userUuid, $userName, $teamUuid, $teamDatabaseUuid, $teamName = null)
     {
         $teamName = $teamName ?: explode(' ', $userName, 2)[0] . "'s Organization";
 
@@ -138,6 +139,7 @@ class UserProjector extends Projector
             name: $teamName,
             ownerUuid: $userUuid,
             personalTeam: true,
+            teamDatabaseUuid: $teamDatabaseUuid,
         )->persist();
     }
 
