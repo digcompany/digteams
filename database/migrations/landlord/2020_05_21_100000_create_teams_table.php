@@ -19,7 +19,6 @@ return new class extends Migration
             $table->foreignId('user_id')->index();
             $table->string('name');
             $table->string('domain')->nullable();
-            $table->foreignId('team_database_id')->nullable()->index();
             $table->boolean('personal_team');
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
