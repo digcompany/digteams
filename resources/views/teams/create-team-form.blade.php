@@ -24,10 +24,11 @@
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label for="team_database_id" value="{{ __('Database') }}" />
             <div class="inline-flex flex-row items-center w-full space-x-2">
-                <x-select id="team_database_id" class="block w-full mt-1" wire:model.defer="state.team_database_id">
+                <x-select id="team_database_id" class="block w-full mt-1" wire:model.defer="state.team_database_uuid">
 
-                    @foreach(\App\Models\TeamDatabase::all() as $database)
-                    <option value="{{ $database->id }}">{{ $database->name }}</option>
+                    <option value="" >select a database</option>
+                    @foreach(auth()->user()->teamDatabases as $database)
+                        <option value="{{ $database->uuid }}">{{ $database->name }}</option>
                     @endforeach
 
                 </x-select>
@@ -43,7 +44,7 @@
             <x-jet-input id="name" type="text" class="block w-full mt-1" wire:model.defer="state.name" autofocus />
             <x-jet-input-error for="name" class="mt-2" />
         </div>
-        @livewire('create-database-form')
+
     </x-slot>
 
     <x-slot name="actions">

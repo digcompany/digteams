@@ -22,4 +22,9 @@ class CreateDatabase implements CreatesDatabase
             ->createTeamDatabase($user->uuid, $input['name'])
             ->persist();
     }
+
+    public function redirectTo()
+    {
+        return route('teams.create');
+    }
 }

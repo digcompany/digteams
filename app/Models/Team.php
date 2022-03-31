@@ -31,11 +31,7 @@ class Team extends JetstreamTeam
      *
      * @var string[]
      */
-    protected $fillable = [
-        'name',
-        'personal_team',
-        'uuid',
-    ];
+    protected $guarded = [];
 
     /**
      * The event map for the model.

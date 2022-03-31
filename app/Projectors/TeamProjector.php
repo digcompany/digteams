@@ -3,6 +3,7 @@
 namespace App\Projectors;
 
 use App\Models\Team;
+use App\Models\TeamDatabase;
 use App\Models\TeamInvitation;
 use App\Models\User;
 use App\StorableEvents\TeamCreated;
@@ -22,9 +23,12 @@ class TeamProjector extends Projector implements ShouldQueue
     {
         $user = User::whereUuid($event->ownerUuid)->first();
 
+        $teamDatabase = TeamDatabase::whereUuid($event->teamDatabaseUuid)->firstOrFail();
+
         $user->switchTeam($team = $user->ownedTeams()->create([
             'uuid' => $event->teamUuid,
             'name' => $event->name,
+            'team_database_id' => $teamDatabase->id,
             'personal_team' => $event->personalTeam,
         ]));
     }

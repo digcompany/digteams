@@ -51,9 +51,3 @@ jobs:
         run: php artisan icon:cache
       - name: Run tests
         run: php artisan test
-        env:
-          DB_CONNECTION: mysql
-          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
-          DB_USERNAME: root
-          DB_DATABASE: test
-          DB_PASSWORD: null

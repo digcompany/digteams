@@ -26,6 +26,7 @@ class CreateTeam implements CreatesTeams
 
         Validator::make($input, [
             'name' => ['required', 'string','unique:landlord.teams,name', 'max:255'],
+            'team_database_uuid' => ['required', 'exists:landlord.team_databases,uuid'],
             'uuid' => ['nullable'],
         ])->validateWithBag('createTeam');
 
@@ -33,7 +34,11 @@ class CreateTeam implements CreatesTeams
 
         $uuid = Str::uuid();
 
-        TeamAggregate::retrieve($uuid)->createTeam($user->uuid, $input['name'])->persist();
+        TeamAggregate::retrieve($uuid)->createTeam(
+            ownerUuid: $user->uuid,
+            name: $input['name'],
+            teamDatabaseUuid: $input['team_database_uuid']
+        )->persist();
 
         return $user->fresh()->currentTeam;
     }

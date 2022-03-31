@@ -2,6 +2,7 @@
 
 namespace App\Projectors;
 
+use App\Jobs\MigrateTeamDatabase;
 use App\Models\User;
 use App\StorableEvents\TeamDatabaseCreated;
 use Artisan;
@@ -35,9 +36,7 @@ class TeamDatabaseProjector extends Projector
 
                 DB::connection('team')->statement("CREATE DATABASE IF NOT EXISTS `{$event->name}` CHARACTER SET `$charset` COLLATE `$collation`");
 
-               $artisan = Artisan::call('team-db:migrate', [
-                    'db' => $teamDatabase->id,
-                ]);
+                MigrateTeamDatabase::dispatch($teamDatabase->uuid);
 
             case 'pgsql':
                 /* 'TODO: add support for this driver' */

@@ -10,6 +10,7 @@ class TeamCreated extends ShouldBeStored
         public string $teamUuid,
         public string $name,
         public string $ownerUuid,
+        public string $teamDatabaseUuid,
         public ?bool $personalTeam = false,
     ) {
     }

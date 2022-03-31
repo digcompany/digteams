@@ -10,4 +10,6 @@
             @livewire('teams.create-team-form')
         </div>
     </div>
+
+    @livewire('create-database-form')
 </x-app-layout>
