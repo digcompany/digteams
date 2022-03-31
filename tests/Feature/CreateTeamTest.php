@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class CreateTeamTest extends TestCase
 {
-    use RefreshDatabase;
+    // use RefreshDatabase;
 
     public function test_teams_can_be_created()
     {

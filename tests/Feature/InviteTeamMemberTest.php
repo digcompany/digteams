@@ -12,7 +12,7 @@ use Tests\TestCase;
 
 class InviteTeamMemberTest extends TestCase
 {
-    use RefreshDatabase;
+    // use RefreshDatabase;
 
     public function test_team_members_can_be_invited_to_team()
     {

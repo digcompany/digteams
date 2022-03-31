@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class CreateLinkTest extends TestCase
 {
-    use RefreshDatabase;
+    // use RefreshDatabase;
 
     public function test_links_can_be_created()
     {

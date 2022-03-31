@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class UpdateTeamMemberRoleTest extends TestCase
 {
-    use RefreshDatabase;
+    // use RefreshDatabase;
 
     public function test_team_member_roles_can_be_updated()
     {

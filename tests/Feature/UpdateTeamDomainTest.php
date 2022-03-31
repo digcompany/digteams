@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class UpdateTeamDomainTest extends TestCase
 {
-    use RefreshDatabase;
+    // use RefreshDatabase;
 
     public function test_team_domains_can_be_updated()
     {
