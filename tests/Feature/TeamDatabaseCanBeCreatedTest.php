@@ -23,7 +23,7 @@ class TeamDatabaseCanBeCreatedTest extends TestCase
         ])->call('createDatabase');
 
         $this->assertDatabaseHas('team_databases', [
-            'name' => 'Test Database',
+            'name' => 'test_database',
         ], (new TeamDatabase())->getConnectionName());
     }
 }

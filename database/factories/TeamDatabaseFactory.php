@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,10 @@ class TeamDatabaseFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'uuid' => $this->faker->uuid,
+            'name' => $this->faker->name,
+            'driver' => 'mysql',
+            'user_id' => $this->faker->unique()->numberBetween(1, User::count()),
         ];
     }
 }
