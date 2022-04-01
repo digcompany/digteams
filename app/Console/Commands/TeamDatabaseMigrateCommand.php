@@ -45,7 +45,7 @@ class TeamDatabaseMigrateCommand extends Command
 
         $this->line('');
         $this->line('-----------------------------------------');
-        $this->line("Migrating team database #{$db->id}");
+        $this->line("Migrating team database #{$db->id} ({$db->name})");
         $this->line('-----------------------------------------');
         $this->line('');
 
@@ -56,7 +56,7 @@ class TeamDatabaseMigrateCommand extends Command
         }
 
         $this->call(
-            $this->options('fresh') ? 'migrate:fresh' : 'migrate',
+            $this->option('fresh') ? 'migrate:fresh' : 'migrate',
             $options
         );
     }
