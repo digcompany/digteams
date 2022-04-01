@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Team;
+use App\Models\TeamDatabase;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -28,5 +29,10 @@ class TeamFactory extends Factory
             'user_id' => User::factory(),
             'personal_team' => true,
         ];
+    }
+
+    public function withTeamDatabase()
+    {
+        return $this->has(TeamDatabase::factory());
     }
 }

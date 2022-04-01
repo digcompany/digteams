@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('teams', function (Blueprint $table) {
-            $table->foreignId('team_database_id')->index()->constrained();
+            $table->foreignId('team_database_id')->index()->nullable();
         });
     }
 
@@ -26,7 +26,6 @@ return new class extends Migration
     public function down()
     {
         Schema::table('teams', function (Blueprint $table) {
-            $table->dropForeign(['team_database_id']);
             $table->dropColumn(['team_database_id']);
         });
     }

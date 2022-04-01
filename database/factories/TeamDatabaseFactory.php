@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\TeamDatabase>
@@ -19,9 +20,9 @@ class TeamDatabaseFactory extends Factory
     {
         return [
             'uuid' => $this->faker->uuid,
-            'name' => $this->faker->name,
+            'name' => str($this->faker->name)->snake(),
             'driver' => 'mysql',
-            'user_id' => $this->faker->unique()->numberBetween(1, User::count()),
+            'user_id' => isset(Auth::user()->id) ? Auth::user()->id : $this->faker->unique()->numberBetween(1, User::count()),
         ];
     }
 }
