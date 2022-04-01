@@ -41,7 +41,10 @@ class TeamServiceProvider extends ServiceProvider
             $team = Team::where('domain', $domain)->first();
 
             if (isset($team->id) && isset($team->team_database_id)) {
-                $team->configure()->use();
+                $team->configure()
+                ->use()
+                ->applyTeamScopeToUserBase();
+
             } else {
                 /**
                  * Allow registration of new users.

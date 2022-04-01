@@ -48,6 +48,7 @@ class Team extends JetstreamTeam
     {
         config([
             'database.connections.team.database' => $this->teamDatabase->name,
+            'cache.prefix' => $this->id,
         ]);
 
         DB::purge('team');
@@ -56,16 +57,23 @@ class Team extends JetstreamTeam
 
         Schema::connection('team')->getConnection()->reconnect();
 
-        User::addGlobalScope('team', function ($query) {
-            $query->whereHas('teams', function ($query) {
-                $query->where('id', $this->id);
-            });
-            $query->orWhereHas('ownedTeams', function ($query) {
-                $query->where('id', $this->id);
-            });
-        });
+        app('cache')->purge(
+            config('cache.default')
+        );
 
         return $this;
+    }
+
+    public function applyTeamScopeToUserBase()
+    {
+        User::addGlobalScope('team', function ($query) {
+            $query->whereHas('teams', function ($query) {
+                $query->where('teams.id', $this->id);
+            });
+            $query->orWhereHas('ownedTeams', function ($query) {
+                $query->where('teams.id', $this->id);
+            });
+        });
     }
 
     public function use()

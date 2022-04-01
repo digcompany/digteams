@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class TeamMiddleware
+class TeamSession
 {
     /**
      * Handle an incoming request.
@@ -16,11 +16,14 @@ class TeamMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->has('team_uuid') && $request->user()) {
-            $team = \App\Models\Team::whereUuid($request->team_uuid)->firstOrFail();
+        if (isset(app()['team'])) {
 
-            if (! $request->user()->switchTeam($team)) {
-                abort(403);
+            if (! $request->session()->has('team_uuid')) {
+                $request->session()->put('team_uuid', app('team')->uuid);
+            }
+
+            if ($request->session()->get('team_uuid') !== app('team')->uuid) {
+                abort(401);
             }
         }
 
