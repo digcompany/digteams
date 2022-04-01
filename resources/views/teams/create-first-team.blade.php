@@ -71,7 +71,9 @@
             @livewire('teams.create-team-form')
         </div>
     </div>
+    @livewire('create-database-form')
     @endif
+
 
 
 </x-guest-layout>

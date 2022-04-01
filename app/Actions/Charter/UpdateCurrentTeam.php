@@ -12,7 +12,7 @@ class UpdateCurrentTeam implements UpdatesCurrentTeam
     public function update($user, array $input)
     {
         Validator::make($input, [
-            'team_uuid' => ['required', 'string', 'exists:teams,uuid'],
+            'team_uuid' => ['required', 'string', 'exists:landlord.teams,uuid'],
         ])->validateWithBag('updateCurrentTeam');
 
         $userAggregate = UserAggregate::retrieve($user->uuid);

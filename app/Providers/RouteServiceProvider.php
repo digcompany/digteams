@@ -37,7 +37,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
 
             Route::middleware('web')
-                ->group(base_path('routes/jetstream.php'));
+                ->group(base_path('routes/charter.php'));
 
             if (app()->environment('local')) {
                 Route::middleware('web')

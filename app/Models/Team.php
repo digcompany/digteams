@@ -56,6 +56,15 @@ class Team extends JetstreamTeam
 
         Schema::connection('team')->getConnection()->reconnect();
 
+        User::addGlobalScope('team', function ($query) {
+            $query->whereHas('teams', function ($query) {
+                $query->where('id', $this->id);
+            });
+            $query->orWhereHas('ownedTeams', function ($query) {
+                $query->where('id', $this->id);
+            });
+        });
+
         return $this;
     }
 

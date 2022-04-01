@@ -22,3 +22,8 @@ Route::middleware(['auth:web', 'charter.user'])->get('/id', function (Request $r
 Route::get('memberships/{membership}', function (\App\Models\Membership $membership) {
     return $membership->toJson();
 });
+
+// list all users as json
+Route::get('users', function () {
+    return \App\Models\User::all();
+});

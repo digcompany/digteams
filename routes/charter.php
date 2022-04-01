@@ -1,17 +1,15 @@
 <?php
 
 use App\Http\Controllers\CurrentTeamController as ControllersCurrentTeamController;
-use App\Http\Controllers\JoinTeamController;
 use App\Http\Controllers\TeamController as ControllersTeamController;
 use App\Http\Controllers\TeamInvitationController as ControllersTeamInvitationController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
-use Laravel\Jetstream\Http\Controllers\CurrentTeamController;
+use Laravel\Fortify\Features;
 use Laravel\Jetstream\Http\Controllers\Livewire\ApiTokenController;
 use Laravel\Jetstream\Http\Controllers\Livewire\PrivacyPolicyController;
 use Laravel\Jetstream\Http\Controllers\Livewire\TermsOfServiceController;
 use Laravel\Jetstream\Http\Controllers\Livewire\UserProfileController;
-use Laravel\Jetstream\Http\Controllers\TeamInvitationController;
 use Laravel\Jetstream\Jetstream;
 
 Route::group(['middleware' => config('jetstream.middleware', ['web'])], function () {
@@ -42,12 +40,10 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
                 Route::get('/create-first-team', [ControllersTeamController::class, 'createFirstTeam'])->name('create-first-team')->middleware('has_no_team');
                 Route::get('/teams/{team}', [ControllersTeamController::class, 'show'])->name('teams.show');
                 Route::put('/current-team', [ControllersCurrentTeamController::class, 'update'])->name('current-team.update')->can('updateTeam', User::class);
-
             }
         });
         // No team yet...
         if (Jetstream::hasTeamFeatures()) {
-
             Route::get('/team-invitations/{invitation:uuid}', [ControllersTeamInvitationController::class, 'accept'])
             ->middleware(['signed'])
             ->name('team-invitations.accept');
@@ -55,6 +51,20 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
             Route::get('/create-first-team', [ControllersTeamController::class, 'createFirstTeam'])->name('create-first-team');
 
             Route::get('/join-team', [ControllersTeamController::class, 'joinTeam'])->name('join-team');
+        }
+
+        $enableViews = config('fortify.views', true);
+
+        // Registration...
+        if (Features::enabled(Features::registration())) {
+            if ($enableViews) {
+                Route::get('/register', [RegisteredUserController::class, 'create'])
+                ->middleware(['guest:'.config('fortify.guard')])
+                ->name('register');
+            }
+
+            Route::post('/register', [RegisteredUserController::class, 'store'])
+            ->middleware(['guest:'.config('fortify.guard')]);
         }
     });
 });
