@@ -53,7 +53,7 @@ class Team extends JetstreamTeam
     public function configure()
     {
         config([
-            'database.connections.team.database' => $this->teamDatabase->name,
+            'database.connections.team.database' => $this->teamDatabase->name ?? null,
             'cache.prefix' => $this->id,
         ]);
 
