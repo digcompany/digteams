@@ -119,13 +119,11 @@ class Charter
 
     public static function currentTeam()
     {
-        if (! session()->has('current_team_uuid')) {
+        if (! isset(app()['team'])) {
             return false;
         }
 
-        $currentTeamUuid = session()->get('current_team_uuid');
-
-        return Team::whereUuid($currentTeamUuid)->first();
+        return app('team');
     }
 
     public static function ensureTeamForUser(Request $request)
@@ -138,7 +136,6 @@ class Charter
 
         if (isset($team->uuid)) {
             session()->put('current_team_uuid', $team->uuid);
-            session()->put('team', $team);
         }
     }
 
@@ -148,7 +145,6 @@ class Charter
 
         if ($team = Team::where('domain', $host)->first()) {
             session()->put('current_team_uuid', $team->uuid);
-            session()->put('team', $team);
         }
     }
 

@@ -51,6 +51,8 @@ class UpdateTeamDomainForm extends Component
         $this->emit('saved');
 
         $this->emit('refresh-navigation-menu');
+
+        $this->mount($this->team->fresh());
     }
 
     /**

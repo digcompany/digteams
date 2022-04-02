@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Schema;
 use Laravel\Jetstream\Events\TeamCreated;
 use Laravel\Jetstream\Events\TeamDeleted;
@@ -25,6 +27,10 @@ class Team extends JetstreamTeam
     protected $casts = [
         'personal_team' => 'boolean',
     ];
+
+    // protected $appends = [
+    //     'url',
+    // ];
 
     /**
      * The attributes that are mass assignable.
@@ -82,11 +88,34 @@ class Team extends JetstreamTeam
 
         app()->instance('team', $this);
 
+        session()->put('team_uuid', $this->uuid);
+
         return $this;
     }
 
     public function teamDatabase()
     {
         return $this->belongsTo(TeamDatabase::class);
+    }
+
+    public function url() : Attribute
+    {
+        return new Attribute(
+            get: fn ($value, $attributes) => isset($attributes['domain']) ? $this->preferHttps($attributes['domain']) : config('app.url'),
+        );
+    }
+
+    //use  native laravel http client to check if domain supports https
+
+    public function preferHttps($domain)
+    {
+        try {
+            $response = Http::get("https://{$domain}");
+            if ($response->status() === 200) {
+                return "https://{$domain}";
+            }
+        } catch (\GuzzleHttp\Exception\RequestException $e) {
+            return "http://{$domain}";
+        }
     }
 }
