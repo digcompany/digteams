@@ -34,7 +34,7 @@ class TeamDatabaseProjector extends Projector
         {
             case 'mysql':
 
-                DB::connection('team')->statement("CREATE DATABASE IF NOT EXISTS `{$event->name}` CHARACTER SET `$charset` COLLATE `$collation`");
+                DB::connection('team')->statement("CREATE DATABASE IF NOT EXISTS `{$teamDatabase->name}` CHARACTER SET `$charset` COLLATE `$collation`");
 
                 MigrateTeamDatabase::dispatch($teamDatabase->uuid);
 
