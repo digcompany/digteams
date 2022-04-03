@@ -113,8 +113,9 @@ class Team extends JetstreamTeam
             if ($response && $response->status() === 200) {
                 return "https://{$domain}";
             }
-        } catch (\GuzzleHttp\Exception\RequestException $e) {
-            return "http://{$domain}";
+        } catch (\Exception $e) {
+
         }
+        return "http://{$domain}";
     }
 }
