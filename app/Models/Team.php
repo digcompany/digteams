@@ -79,6 +79,7 @@ class Team extends JetstreamTeam
             $query->orWhereHas('ownedTeams', function ($query) {
                 $query->where('teams.id', $this->id);
             });
+            $query->orWhereIn('email', $this->teamInvitations->pluck('email')->toArray());
         });
     }
 
@@ -87,8 +88,6 @@ class Team extends JetstreamTeam
         app()->forgetInstance('team');
 
         app()->instance('team', $this);
-
-        session()->put('team_uuid', $this->uuid);
 
         return $this;
     }

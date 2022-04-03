@@ -2,11 +2,7 @@
 
 use App\Http\Controllers\DocsController;
 use App\Http\Controllers\ImpersonateController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
-use Softnweb\ComingSoon\Http\Controllers\ComingSoonController;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,15 +21,12 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::any('/billing',function(){
-    return view('subscribe');
-})->name('billing');
 
 $authMiddleware = config('jetstream.guard')
 ? 'auth:'.config('jetstream.guard')
 : 'auth';
 
-Route::group(['middleware' => [$authMiddleware, 'has_team', 'verified']], function () {
+Route::group(['middleware' => [$authMiddleware, 'has_team','team.auth', 'verified']], function () {
     Route::get('/impersonate/take/{id}/{guardName?}', [ImpersonateController::class, 'take'])->name('impersonate');
     Route::get(
         '/impersonate/leave',

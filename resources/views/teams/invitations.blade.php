@@ -19,7 +19,7 @@
                     <p>Didn't get a team invitation mail? Ask a member of an existing organization to invite you to their team.</p>
 
                     <p class="py-4">
-                        Why not try  <a class="underline" href="{{ route('teams.create') }}">creating</a> an organization of your own?
+                        Why not try  <a class="underline" href="{{ config('app.url') . route('teams.create', [], false) }}">creating</a> an organization of your own?
                     </p>
                 </div>
             </div>

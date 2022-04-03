@@ -6,6 +6,7 @@ use App\Http\Controllers\TeamInvitationController as ControllersTeamInvitationCo
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
+use Laravel\Fortify\Http\Controllers\RegisteredUserController;
 use Laravel\Jetstream\Http\Controllers\Livewire\ApiTokenController;
 use Laravel\Jetstream\Http\Controllers\Livewire\PrivacyPolicyController;
 use Laravel\Jetstream\Http\Controllers\Livewire\TermsOfServiceController;
@@ -22,7 +23,7 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
             ? 'auth:'.config('jetstream.guard')
             : 'auth';
 
-    Route::group(['middleware' => [$authMiddleware, 'verified']], function () {
+    Route::group(['middleware' => [$authMiddleware, 'team.auth', 'verified']], function () {
         Route::group(['middleware' => ['has_team']], function () {
 
             // User & Profile...
@@ -51,20 +52,8 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
             Route::get('/create-first-team', [ControllersTeamController::class, 'createFirstTeam'])->name('create-first-team');
 
             Route::get('/join-team', [ControllersTeamController::class, 'joinTeam'])->name('join-team');
-        }
 
-        $enableViews = config('fortify.views', true);
-
-        // Registration...
-        if (Features::enabled(Features::registration())) {
-            if ($enableViews) {
-                Route::get('/register', [RegisteredUserController::class, 'create'])
-                ->middleware(['guest:'.config('fortify.guard')])
-                ->name('register');
-            }
-
-            Route::post('/register', [RegisteredUserController::class, 'store'])
-            ->middleware(['guest:'.config('fortify.guard')]);
+            Route::view('/billing', 'subscribe')->name('billing');
         }
     });
 });

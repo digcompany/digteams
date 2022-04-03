@@ -37,7 +37,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \App\Http\Middleware\EnsureTeamForDomain::class,
+            // \App\Http\Middleware\EnsureTeamForDomain::class,
             \App\Http\Middleware\ImpersonatedTeam::class,
             \App\Http\Middleware\TeamSession::class,
             // \App\Http\Middleware\EnsureTeamForUser::class,
@@ -48,6 +48,11 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+
+        'auth.team.auth' => [
+            'auth',
+            'team.auth',
+        ]
     ];
 
     /**
@@ -72,5 +77,6 @@ class Kernel extends HttpKernel
         'charter.domain' => \App\Http\Middleware\EnsureTeamForDomain::class,
         'charter.user' => \App\Http\Middleware\EnsureTeamForUser::class,
         'upgraded' => \App\Http\Middleware\EnsureUpgraded::class,
+        'team.auth' => \App\Http\Middleware\TeamAuth::class,
     ];
 }

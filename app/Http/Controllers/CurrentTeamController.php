@@ -19,19 +19,8 @@ class CurrentTeamController extends Controller
     {
         $team = Jetstream::newTeamModel()->whereUuid($request->team_uuid)->firstOrFail();
 
-        $redirectUrl = false;
-
-        if (isset($request->user()->currentTeam->domain) &&
-            $request->user()->currentTeam->domain != $team->domain) {
-            $redirectUrl =  $team->url;
-        }
-
         $updater->update($request->user(), ['team_uuid' => $team->uuid]);
 
-        if ($redirectUrl) {
-            return redirect($redirectUrl);
-        }
-
-        return redirect(config('fortify.home'), 303);
+        return redirect($team->url ?? config('fortify.home'), 303);
     }
 }

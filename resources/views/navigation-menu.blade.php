@@ -32,7 +32,7 @@
                     <x-nav-link href="#Add Bookmark" onclick="window.livewire.emit('creatingNewLink')">
                         <button
                             class="flex items-center w-full px-2 py-3 text-gray-600 cursor-pointer justify-left hover:bg-gray-100 hover:text-gray-700 focus:outline-none">
-                            @svg('heroicon-o-plus-circle', 'w-4 h-4') <span>{{ __('Add Bookmark') }}</span></button>
+                            @svg('heroicon-o-plus-circle', 'w-4 h-4') <span class="text-xs">{{ __('Add Bookmark') }}</span></button>
                     </x-nav-link>
                     @endif
                 </div>
@@ -78,8 +78,8 @@
                                     {{ __('Switch Orgnizations') }}
                                 </div>
 
-                                @foreach (Auth::user()->allTeams() as $team)
-                                <x-switchable-team :team="$team" />
+                                @foreach (($allTeamsForLoggedInUser = Auth::user()->allTeams()) as $team)
+                                    <x-switchable-team :team="$team" />
                                 @endforeach
                             </div>
                         </x-slot>
@@ -170,12 +170,12 @@
                                     <x-jet-dropdown-link href="#" onclick="window.livewire.emit('creatingNewLink')">
                                         <button
                                             class="flex items-center w-full px-1 text-gray-600 cursor-pointer justify-left hover:bg-gray-100 hover:text-gray-700 focus:outline-none">
-                                            @svg('heroicon-o-plus-circle', 'w-4 h-4') <span>{{ __('Add Bookmark')
+                                            @svg('heroicon-o-plus-circle', 'w-4 h-4') <span class="text-xs">{{ __('Add Bookmark')
                                                 }}</span></button>
                                     </x-jet-dropdown-link>
                                     @endif
 
-                                    @foreach (\App\Models\Link::all() as $link)
+                                    @foreach (($allLinks = \App\Models\Link::all()) as $link)
                                     @if(Gate::allows('view', $link))
 
                                     <div class="grid items-center justify-end w-full grid-cols-2 pr-2 text-gray-600">
@@ -306,7 +306,7 @@
                     {{ __('Switch Orgnizations') }}
                 </div>
 
-                @foreach (Auth::user()->allTeams() as $team)
+                @foreach ($allTeamsForLoggedInUser as $team)
                 <x-switchable-team :team="$team" component="jet-responsive-nav-link" />
                 @endforeach
                 @endif
@@ -338,11 +338,11 @@
                         onclick="window.livewire.emit('creatingNewLink')">
                         <button
                             class="flex items-center w-full px-2 py-3 text-gray-600 cursor-pointer justify-left hover:bg-gray-100 hover:text-gray-700 focus:outline-none">
-                            @svg('heroicon-o-plus-circle', 'w-4 h-4') <span>{{ __('Add Bookmark') }}</span></button>
+                            @svg('heroicon-o-plus-circle', 'w-4 h-4') <span class="text-xs">{{ __('Add Bookmark') }}</span></button>
                     </x-jet-responsive-nav-link>
                     @endif
 
-                    @foreach (\App\Models\Link::all() as $link)
+                    @foreach ($allLinks as $link)
                     @if(Gate::allows('view', $link))
 
                     <div class="grid grid-cols-2">

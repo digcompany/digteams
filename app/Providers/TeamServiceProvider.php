@@ -5,7 +5,6 @@ namespace App\Providers;
 use App\Models\Team;
 use Illuminate\Queue\Events\JobProcessing;
 use Illuminate\Support\ServiceProvider;
-use Laravel\Fortify\Features;
 
 class TeamServiceProvider extends ServiceProvider
 {
@@ -42,24 +41,7 @@ class TeamServiceProvider extends ServiceProvider
 
             if (isset($team->id) && isset($team->team_database_id)) {
                 $team->configure()
-                ->use()
-                ->applyTeamScopeToUserBase();
-
-            } else {
-                /**
-                 * Allow registration of new users.
-                 */
-                config(['fortify.features' => [
-                    Features::registration(),
-                    Features::resetPasswords(),
-                    // Features::emailVerification(),
-                    Features::updateProfileInformation(),
-                    Features::updatePasswords(),
-                    Features::twoFactorAuthentication([
-                        // 'confirm' => true,
-                        'confirmPassword' => true,
-                    ]),
-                ],]);
+                ->use();
             }
         }
     }

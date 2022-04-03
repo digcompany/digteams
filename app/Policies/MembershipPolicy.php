@@ -88,7 +88,7 @@ class MembershipPolicy
         $member = User::find($membership->user_id);
 
         return $user->ownsTeam($team) ||
-        ($user->hasTeamRole($team, 'admin') && $member->id == $user->id) ||
+        $member->id == $user->id ||
         $user->hasTeamRole($team, 'admin') &&
         ! $member->hasTeamRole($team, 'admin');
     }

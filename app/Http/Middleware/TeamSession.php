@@ -27,16 +27,6 @@ class TeamSession
                 abort(401);
             }
 
-            if($request->user() &&
-                ! $request->user()->switchTeam(app('team'))
-            ) {
-                abort(401);
-            }
-        }elseif($request->user() &&
-            isset($request->user()->currentTeam->uuid)
-        ){
-            $team = Team::where('uuid', $request->user()->currentTeam->uuid)->firstOrFail();
-            $team = $team->configure()->use();
         }
 
         return $next($request);

@@ -39,6 +39,9 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/charter.php'));
 
+            Route::middleware(config('fortify.middleware'))
+                ->group(base_path('routes/auth.php'));
+
             if (app()->environment('local')) {
                 Route::middleware('web')
                     ->prefix('dev')
