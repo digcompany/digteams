@@ -41,7 +41,11 @@ class CharterServiceProvider extends ServiceProvider
 
     protected function getDatabaseManager()
     {
-        $teamDatabaseDriver = config('database.connections.team.driver', 'sqlite');
+        $teamDatabaseDriver = config('database.connections.team.driver');
+
+        if(! $teamDatabaseDriver) {
+            throw new \Exception('No team database driver defined');
+        }
 
         switch ($teamDatabaseDriver) {
             case 'mysql':
