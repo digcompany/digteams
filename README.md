@@ -32,16 +32,10 @@ Then edit database configurations to match your local setup
 php artisan migrate:fresh --path=database/migrations/landlord --database=landlord
 ```
 
-### Next you must cache the icons
-
-```bash
-php artisan icon:cache
-```
-
 ### Then install the icons
 
 ```bash
-php artisan buku-icons:install
+php artisan install:icons
 ```
 
 ### After that is finished you can generate an app key
