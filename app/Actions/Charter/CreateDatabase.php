@@ -28,7 +28,7 @@ class CreateDatabase implements CreatesDatabase
             new DatabaseDoesNotExist,
         ];
 
-        if(app()->environment('production')) {
+        if (app()->environment('production')) {
             $nameRules[] = 'regex:/^[a-z0-9- _]+$/';
             $nameRules[] = 'not_in:test_database,test_database.sqlite,mysql';
         }

@@ -28,13 +28,13 @@ class TeamsMigrateCommand extends Command
      */
     public function handle()
     {
-        if($this->argument('team')){
+        if ($this->argument('team')) {
             $this->migrate(
                 Team::find($this->argument('team'))
             );
-        }else{
+        } else {
             Team::all()->each(
-                fn($team) => $this->migrate($team)
+                fn ($team) => $this->migrate($team)
             );
         }
     }
@@ -51,7 +51,7 @@ class TeamsMigrateCommand extends Command
 
         $options = ['--force' => true];
 
-        if($this->option('seed')){
+        if ($this->option('seed')) {
             $options['--seed'] = true;
         }
 

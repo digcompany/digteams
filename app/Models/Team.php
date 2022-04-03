@@ -114,8 +114,8 @@ class Team extends JetstreamTeam
                 return "https://{$domain}";
             }
         } catch (\Exception $e) {
-
         }
+
         return "http://{$domain}";
     }
 }

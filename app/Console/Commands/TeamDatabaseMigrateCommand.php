@@ -28,13 +28,13 @@ class TeamDatabaseMigrateCommand extends Command
      */
     public function handle()
     {
-        if($this->argument('db')){
+        if ($this->argument('db')) {
             $this->migrate(
                 TeamDatabase::find($this->argument('db'))
             );
-        }else{
+        } else {
             TeamDatabase::all()->each(
-                fn($db) => $this->migrate($db)
+                fn ($db) => $this->migrate($db)
             );
         }
     }
@@ -51,7 +51,7 @@ class TeamDatabaseMigrateCommand extends Command
 
         $options = ['--force' => true];
 
-        if($this->option('seed')){
+        if ($this->option('seed')) {
             $options['--seed'] = true;
         }
 

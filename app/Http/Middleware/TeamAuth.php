@@ -32,8 +32,8 @@ class TeamAuth
                 $team = Team::where('uuid', $request->user()->currentTeam->uuid)->firstOrFail();
                 $team = $team->configure()->use();
             }
-
         }
+
         return $next($request);
     }
 }
