@@ -2,11 +2,10 @@
 
 namespace App\Projectors;
 
+use App\Contracts\DatabaseManager;
 use App\Jobs\MigrateTeamDatabase;
 use App\Models\User;
 use App\StorableEvents\TeamDatabaseCreated;
-use Artisan;
-use Illuminate\Support\Facades\DB;
 use Spatie\EventSourcing\EventHandlers\Projectors\Projector;
 
 class TeamDatabaseProjector extends Projector
@@ -15,7 +14,7 @@ class TeamDatabaseProjector extends Projector
     {
         $user = User::where('uuid', $event->userUuid)->firstOrFail();
 
-       $teamDatabase = $user->teamDatabases()->firstOrCreate(
+        $teamDatabase = $user->teamDatabases()->firstOrCreate(
             [
                 'name' => $event->name,
             ],
@@ -26,28 +25,10 @@ class TeamDatabaseProjector extends Projector
             ]
         );
 
-        $driver = DB::connection('team')->getConfig('driver');
-        $charset = DB::connection('team')->getConfig('charset');
-        $collation = DB::connection('team')->getConfig('collation');
+        $databaseManager = app(DatabaseManager::class)->setConnection('team');
 
-        switch($driver)
-        {
-            case 'mysql':
+        $databaseManager->createDatabase($teamDatabase);
 
-                DB::connection('team')->statement("CREATE DATABASE IF NOT EXISTS `{$teamDatabase->name}` CHARACTER SET `$charset` COLLATE `$collation`");
-
-                MigrateTeamDatabase::dispatch($teamDatabase->uuid);
-
-            case 'pgsql':
-                /* 'TODO: add support for this driver' */
-;
-                break;
-            case 'sqlite':
-                /* 'TODO: add support for this driver' */
-
-                break;
-        }
-
-
+        MigrateTeamDatabase::dispatch($teamDatabase->uuid);
     }
 }

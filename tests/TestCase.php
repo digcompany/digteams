@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use App\Charter;
 use App\Console\Kernel;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
@@ -24,7 +25,7 @@ abstract class TestCase extends BaseTestCase
             ],
         ]);
 
-
+        Charter::manageDatabasesUsing(FakeDatabaseManager::class);
 
         $this->artisan('migrate --database=landlord --path=database/migrations/landlord');
         $this->artisan('migrate:fresh --database=team');

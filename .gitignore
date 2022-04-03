@@ -17,3 +17,4 @@ yarn-error.log
 _ide_helper.php
 .php-cs-fixer.cache
 auth.json
+database/test_database

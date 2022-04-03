@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\TeamDatabaseManagers;
 
+use App\Contracts\DatabaseManager;
 use App\Exceptions\NoConnectionSetException;
-use App\Models\TeamDatabase;
 use Illuminate\Database\Connection;
 use Illuminate\Support\Facades\DB;
 
-class MySQLDatabaseManager
+class MySQLDatabaseManager implements DatabaseManager
 {
     /** @var string */
     protected $connection;
@@ -23,12 +23,14 @@ class MySQLDatabaseManager
         return DB::connection($this->connection);
     }
 
-    public function setConnection(string $connection): void
+    public function setConnection(string $connection)
     {
         $this->connection = $connection;
+
+        return $this;
     }
 
-    public function createDatabase(TeamDatabase $teamDatabase): bool
+    public function createDatabase($teamDatabase): bool
     {
         $database = $teamDatabase->name;
         $charset = $this->database()->getConfig('charset');
@@ -37,9 +39,9 @@ class MySQLDatabaseManager
         return $this->database()->statement("CREATE DATABASE IF NOT EXISTS `{$database}` CHARACTER SET `$charset` COLLATE `$collation`");
     }
 
-    public function deleteDatabase(TeamDatabase $teamDatabase): bool
+    public function deleteDatabase($teamDatabase): bool
     {
-        return $this->database()->statement("DROP DATABASE IF NOT EXISTS `{$teamDatabase->name}`");
+        return $this->database()->statement("DROP DATABASE IF EXISTS `{$teamDatabase->name}`");
     }
 
     public function databaseExists(string $name): bool

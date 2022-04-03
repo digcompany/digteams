@@ -14,3 +14,4 @@ mysqldump/*.sql.tar.xz
 mysqldump/*.sql.tar.7z
 mysqldump/*.sql.tar.lz
 mysqldump/*.sql.tar.lz4
+test_database

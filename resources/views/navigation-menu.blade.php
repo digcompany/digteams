@@ -67,7 +67,7 @@
                                     {{ __('Organization Settings') }}
                                 </x-jet-dropdown-link>
 
-                                <x-jet-dropdown-link href="{{ route('teams.create') }}">
+                                <x-jet-dropdown-link href="{{ config('app.url').route('teams.create', [], false) }}">
                                     {{ __('Create New Organization') }}
                                 </x-jet-dropdown-link>
 
@@ -293,7 +293,7 @@
                 </x-jet-responsive-nav-link>
 
                 @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
-                <x-jet-responsive-nav-link href="{{ route('teams.create') }}"
+                <x-jet-responsive-nav-link href="{{ config('app.url').route('teams.create', [], false) }}"
                     :active="request()->routeIs('teams.create')">
                     {{ __('Create New Organization') }}
                 </x-jet-responsive-nav-link>

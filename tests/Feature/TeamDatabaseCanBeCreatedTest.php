@@ -18,12 +18,14 @@ class TeamDatabaseCanBeCreatedTest extends TestCase
     {
         $this->actingAs(User::factory()->create());
 
+        $this->withoutExceptionHandling();
+
         $component = Livewire::test(CreateDatabaseForm::class)->set('state', [
-            'name' => 'test_database',
+            'name' => ':memory:',
         ])->call('createDatabase');
 
         $this->assertDatabaseHas('team_databases', [
-            'name' => 'test_database',
+            'name' => ':memory:',
         ], (new TeamDatabase())->getConnectionName());
     }
 }

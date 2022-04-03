@@ -12,6 +12,10 @@ use App\Actions\Charter\UpdateTeamDomain;
 use App\Actions\Charter\UpdateTeamLogo;
 use App\Actions\Charter\UpdateUserType;
 use App\Charter;
+use App\Contracts\DatabaseManager;
+use App\TeamDatabaseManagers\MySQLDatabaseManager;
+use App\TeamDatabaseManagers\SQLiteDatabaseManager;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 
 class CharterServiceProvider extends ServiceProvider
@@ -23,6 +27,7 @@ class CharterServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Charter::manageDatabasesUsing($this->getDatabasemanager());
         Charter::createDatabasesUsing(CreateDatabase::class);
         Charter::subscribeByPromoCodeUsing(SubscribeByPromoCode::class);
         Charter::updateUserTypesUsing(UpdateUserType::class);
@@ -32,5 +37,20 @@ class CharterServiceProvider extends ServiceProvider
         Charter::createLinksUsing(CreateLink::class);
         Charter::updateLinksUsing(UpdateLink::class);
         Charter::deleteLinksUsing(DeleteLink::class);
+    }
+
+    protected function getDatabaseManager()
+    {
+        $teamDatabaseDriver = config('database.connections.team.driver', 'sqlite');
+
+        switch ($teamDatabaseDriver) {
+            case 'mysql':
+                return MySQLDatabaseManager::class;
+                break;
+            case 'sqlite':
+                return SQLiteDatabaseManager::class;
+            default:
+                throw new \Exception("Unsupported database driver: {$teamDatabaseDriver}");
+        }
     }
 }

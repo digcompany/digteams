@@ -20,21 +20,20 @@ class TeamAuth
         if (isset(app()['team'])) {
             $permittedRoutes = ['create-first-team', 'join-team', 'team-invitations.accept'];
 
-            if ($request->user() &&
-                ((isset($request->user()->currentTeam->id) &&
-                  $request->user()->currentTeam->id !== app('team')->id) ||
-                ! $request->user()->switchTeam(app('team'))) &&
-                ! in_array($request->route()->getName(), $permittedRoutes)
-                ) {
-                return redirect(route('join-team'));
-            }
-        } elseif ($request->user() &&
+            if ($request->user() && isset($request->user()->currentTeam->id)) {
+                if (! $request->user()->switchTeam(app('team'))) {
+                    if (! in_array($request->route()->getName(), $permittedRoutes)) {
+                        return redirect(route('join-team'));
+                    }
+                }
+            } elseif ($request->user() &&
                 isset($request->user()->currentTeam->uuid)
         ) {
-            $team = Team::where('uuid', $request->user()->currentTeam->uuid)->firstOrFail();
-            $team = $team->configure()->use();
-        }
+                $team = Team::where('uuid', $request->user()->currentTeam->uuid)->firstOrFail();
+                $team = $team->configure()->use();
+            }
 
+        }
         return $next($request);
     }
 }

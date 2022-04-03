@@ -110,7 +110,7 @@ class Team extends JetstreamTeam
     {
         try {
             $response = Http::get("https://{$domain}");
-            if ($response->status() === 200) {
+            if ($response && $response->status() === 200) {
                 return "https://{$domain}";
             }
         } catch (\GuzzleHttp\Exception\RequestException $e) {

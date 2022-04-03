@@ -20,7 +20,7 @@ class TeamDatabase extends Model
     protected $guarded = [];
 
     protected $invalidCharacters = [
-        '"', '~','!','@','#','$','%','^','&','*','(',')','-','+','=',';',':','/','','?','|',']','[','{','}','<','>','.','`','\\',' ', '\'',
+        '"', '~','!','@','#','$','%','^','&','*','(',')','-','+','=',';','/','','?','|',']','[','{','}','<','>','`','\\',' ', '\'',
     ];
 
     public function configure()
@@ -61,8 +61,13 @@ class TeamDatabase extends Model
     {
         return new Attribute(
             get: fn ($value, $attributes) => $attributes['name'],
-            set: fn ($value, $attributes) => str($attributes['name'] ?? $value)->lower()->snake()->replace($this->invalidCharacters, ''),
+            set: fn ($value, $attributes) => $this->lowerSnakeSanitize($attributes['name'] ?? $value),
         );
+    }
+
+    public function lowerSnakeSanitize($name)
+    {
+        return str($name)->lower()->snake()->replace($this->invalidCharacters, '');
     }
 
 }

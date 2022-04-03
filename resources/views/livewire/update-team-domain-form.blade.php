@@ -21,11 +21,11 @@
 
                 <x-jet-input id="domain" type="text" class="block w-full mt-1" wire:model.defer="state.domain"
                     :disabled="! Gate::check('update', $team)" />
-                @isset($this->state['domain'])
+
                 <a class="inline-flex flex-row items-center space-x-1 text-xs text-blue-500 hover:text-indigo-700" target="_blank" href="{{ $team->url }}">
                     @svg('fas-arrow-up-right-from-square', 'h-5 w-5') <span>Visit</span>
                 </a>
-                @endisset
+
 
             </div>
 
