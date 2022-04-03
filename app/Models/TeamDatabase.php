@@ -69,5 +69,4 @@ class TeamDatabase extends Model
     {
         return str($name)->lower()->snake()->replace($this->invalidCharacters, '');
     }
-
 }

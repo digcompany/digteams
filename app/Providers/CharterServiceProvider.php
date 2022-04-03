@@ -12,10 +12,8 @@ use App\Actions\Charter\UpdateTeamDomain;
 use App\Actions\Charter\UpdateTeamLogo;
 use App\Actions\Charter\UpdateUserType;
 use App\Charter;
-use App\Contracts\DatabaseManager;
 use App\TeamDatabaseManagers\MySQLDatabaseManager;
 use App\TeamDatabaseManagers\SQLiteDatabaseManager;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 
 class CharterServiceProvider extends ServiceProvider
@@ -43,13 +41,14 @@ class CharterServiceProvider extends ServiceProvider
     {
         $teamDatabaseDriver = config('database.connections.team.driver');
 
-        if(! $teamDatabaseDriver) {
+        if (! $teamDatabaseDriver) {
             throw new \Exception('No team database driver defined');
         }
 
         switch ($teamDatabaseDriver) {
             case 'mysql':
                 return MySQLDatabaseManager::class;
+
                 break;
             case 'sqlite':
                 return SQLiteDatabaseManager::class;

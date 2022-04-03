@@ -53,7 +53,6 @@ class TeamController extends LivewireTeamController
      */
     public function createFirstTeam(Request $request)
     {
-
         return view('teams.create-first-team', [
             'user' => $request->user(),
         ]);

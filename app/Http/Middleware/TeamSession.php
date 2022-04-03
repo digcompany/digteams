@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Team;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -18,7 +17,6 @@ class TeamSession
     public function handle(Request $request, Closure $next)
     {
         if (isset(app()['team'])) {
-
             if (! $request->session()->has('team_uuid')) {
                 $request->session()->put('team_uuid', app('team')->uuid);
             }
@@ -26,7 +24,6 @@ class TeamSession
             if ($request->session()->get('team_uuid') !== app('team')->uuid) {
                 abort(401);
             }
-
         }
 
         return $next($request);

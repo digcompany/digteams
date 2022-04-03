@@ -52,7 +52,7 @@ class Kernel extends HttpKernel
         'auth.team.auth' => [
             'auth',
             'team.auth',
-        ]
+        ],
     ];
 
     /**

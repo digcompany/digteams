@@ -3,13 +3,10 @@
 namespace App\Rules;
 
 use App\Contracts\DatabaseManager;
-use App\Models\TeamDatabase;
 use Illuminate\Contracts\Validation\Rule;
-use Illuminate\Support\Facades\DB;
 
 class DatabaseDoesNotExist implements Rule
 {
-
     protected $databaseManager;
 
     /**
