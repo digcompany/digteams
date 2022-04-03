@@ -47,4 +47,33 @@ class TeamMemberManager extends JetstreamTeamMemberManager
 
         $this->team = $this->team->fresh();
     }
+
+    /**
+     * Remove the currently authenticated user from the team.
+     *
+     * @param  \Laravel\Jetstream\Contracts\RemovesTeamMembers  $remover
+     * @return void
+     */
+    public function leaveTeam(RemovesTeamMembers $remover)
+    {
+        $remover->remove(
+            $this->user,
+            $this->team,
+            $this->user
+        );
+
+        $this->confirmingLeavingTeam = false;
+
+        $this->team = $this->team->fresh();
+
+        $this->banner(_('You are no longer a member of this team.'), 'danger');
+
+        return to_route('join-team');
+    }
+
+    public function banner(string $message, string $style = 'success')
+    {
+        session()->flash('flash.banner', $message);
+        session()->flash('flash.bannerStyle', $style);
+    }
 }

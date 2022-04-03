@@ -23,7 +23,9 @@ class TeamAuth
             if ($request->user() && isset($request->user()->currentTeam->id)) {
                 if (! $request->user()->switchTeam(app('team'))) {
                     if (! in_array($request->route()->getName(), $permittedRoutes)) {
-                        return redirect(route('join-team'));
+                        return redirect(route('join-team'))->dangerBanner(
+                            __('You are not a member of this team.'),
+                        );
                     }
                 }
             } elseif ($request->user() &&
