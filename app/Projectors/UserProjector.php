@@ -131,7 +131,7 @@ class UserProjector extends Projector
 
     private function withPersonalTeam($userUuid, $userName, $teamUuid, $teamDatabaseUuid, $teamName = null)
     {
-        $teamName = $teamName ?: explode(' ', $userName, 2)[0] . "'s Organization";
+        $teamName = $teamName ?: explode(' ', $userName, 2)[0] . "'s Team";
 
         $teamAggregate = TeamAggregate::retrieve($teamUuid);
 

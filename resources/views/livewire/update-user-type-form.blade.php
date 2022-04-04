@@ -9,7 +9,7 @@
 
     <x-slot name="form">
 
-        <!-- Organization Name -->
+        <!-- Team Name -->
         <div class="col-span-6 sm:col-span-4">
             <x-jet-label class="w-12 mt-4 mr-2" for="type" value="{{ __('Type') }}" />
 

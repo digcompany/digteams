@@ -1,6 +1,6 @@
 <x-jet-form-section submit="createTeam">
     <x-slot name="title">
-        {{ __('Organization Details') }}
+        {{ __('Team Details') }}
     </x-slot>
 
     <x-slot name="description">
@@ -9,7 +9,7 @@
 
     <x-slot name="form">
         <div class="col-span-6">
-            <x-jet-label value="{{ __('Organization Owner') }}" />
+            <x-jet-label value="{{ __('Team Owner') }}" />
 
             <div class="flex items-center mt-2">
                 <img class="object-cover w-12 h-12 rounded-full" src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}">
@@ -40,7 +40,7 @@
         </div>
 
         <div class="col-span-6 sm:col-span-4">
-            <x-jet-label for="name" value="{{ __('Organization Name') }}" />
+            <x-jet-label for="name" value="{{ __('Team Name') }}" />
             <x-jet-input id="name" type="text" class="block w-full mt-1" wire:model.defer="state.name" autofocus />
             <x-jet-input-error for="name" class="mt-2" />
         </div>

@@ -1,4 +1,4 @@
-# Using a Custom Domain for your Organization
+# Using a Custom Domain for your Team
 
 In order to get your domain to resolve to the application, you will gave to create a cname
 in your domain provider's register pointing to `$APP_DOMAIN`.

@@ -2,22 +2,22 @@
     @if (Gate::check('addTeamMember', $team))
     <x-jet-section-border />
 
-    <!-- Add Organization Member -->
+    <!-- Add Team Member -->
     <div class="mt-10 sm:mt-0">
         <x-jet-form-section submit="addTeamMember">
             <x-slot name="title">
-                {{ __('Add Organization Member') }}
+                {{ __('Add Team Member') }}
             </x-slot>
 
             <x-slot name="description">
-                {{ __('Add a new organization member to your organization, allowing them to collaborate with you.') }}
+                {{ __('Add a new team member to your team, allowing them to collaborate with you.') }}
             </x-slot>
 
             <x-slot name="form">
                 <div class="col-span-6">
                     <div class="max-w-xl text-sm text-gray-600">
                         {{ __('Please provide the email address of the person you would like to add to this
-                        organization.') }}
+                        team.') }}
                     </div>
                 </div>
 
@@ -86,16 +86,16 @@
     @if ($team->teamInvitations->isNotEmpty() && Gate::check('addTeamMember', $team))
     <x-jet-section-border />
 
-    <!-- Organization Member Invitations -->
+    <!-- Team Member Invitations -->
     <div class="mt-10 sm:mt-0">
         <x-jet-action-section>
             <x-slot name="title">
-                {{ __('Pending Organization Invitations') }}
+                {{ __('Pending Team Invitations') }}
             </x-slot>
 
             <x-slot name="description">
-                {{ __('These people have been invited to your organization and have been sent an invitation email. They
-                may join the organization by accepting the email invitation.') }}
+                {{ __('These people have been invited to your team and have been sent an invitation email. They
+                may join the team by accepting the email invitation.') }}
             </x-slot>
 
             <x-slot name="content">
@@ -106,7 +106,7 @@
 
                         <div class="flex items-center">
                             @if (Gate::check('removeTeamMember', $team))
-                            <!-- Cancel Organization Invitation -->
+                            <!-- Cancel Team Invitation -->
                             <button class="ml-6 text-sm text-red-500 cursor-pointer focus:outline-none"
                                 wire:click="cancelTeamInvitation('{{ $invitation->uuid }}')">
                                 {{ __('Cancel') }}
@@ -124,18 +124,18 @@
     @if ($team->users->isNotEmpty())
     <x-jet-section-border />
 
-    <!-- Manage Organization Members -->
+    <!-- Manage Team Members -->
     <div class="mt-10 sm:mt-0">
         <x-jet-action-section>
             <x-slot name="title">
-                {{ __('Organization Members') }}
+                {{ __('Team Members') }}
             </x-slot>
 
             <x-slot name="description">
-                {{ __('All of the people that are part of this organization.') }}
+                {{ __('All of the people that are part of this team.') }}
             </x-slot>
 
-            <!-- Organization Member List -->
+            <!-- Team Member List -->
             <x-slot name="content">
                 <div class="space-y-6">
                     @foreach ($team->users->sortBy('name') as $user)
@@ -153,7 +153,7 @@
                                 {{ $user->email }}
                             </a>
 
-                            <!-- Manage Organization Member Role -->
+                            <!-- Manage Team Member Role -->
                             @if (
                             Gate::check('addTeamMember', $team) &&
                             Laravel\Jetstream\Jetstream::hasRoles() &&
@@ -170,14 +170,14 @@
                             </div>
                             @endif
 
-                            <!-- Leave Organization -->
+                            <!-- Leave Team -->
                             @if ($this->user->id === $user->id)
                             <button class="ml-6 text-sm text-red-500 cursor-pointer"
                                 wire:click="$toggle('confirmingLeavingTeam')">
                                 {{ __('Leave') }}
                             </button>
 
-                            <!-- Remove Organization Member -->
+                            <!-- Remove Team Member -->
                             @elseif (
                             Gate::check('addTeamMember', $team) &&
                             Laravel\Jetstream\Jetstream::hasRoles() &&
@@ -251,14 +251,14 @@
         </x-slot>
     </x-jet-dialog-modal>
 
-    <!-- Leave Organization Confirmation Modal -->
+    <!-- Leave Team Confirmation Modal -->
     <x-jet-confirmation-modal wire:model="confirmingLeavingTeam">
         <x-slot name="title">
-            {{ __('Leave Organization') }}
+            {{ __('Leave Team') }}
         </x-slot>
 
         <x-slot name="content">
-            {{ __('Are you sure you would like to leave this organization?') }}
+            {{ __('Are you sure you would like to leave this team?') }}
         </x-slot>
 
         <x-slot name="footer">
@@ -272,14 +272,14 @@
         </x-slot>
     </x-jet-confirmation-modal>
 
-    <!-- Remove Organization Member Confirmation Modal -->
+    <!-- Remove Team Member Confirmation Modal -->
     <x-jet-confirmation-modal wire:model="confirmingTeamMemberRemoval">
         <x-slot name="title">
-            {{ __('Remove Organization Member') }}
+            {{ __('Remove Team Member') }}
         </x-slot>
 
         <x-slot name="content">
-            {{ __('Are you sure you would like to remove this person from the organization?') }}
+            {{ __('Are you sure you would like to remove this person from the team?') }}
         </x-slot>
 
         <x-slot name="footer">
