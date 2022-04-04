@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\StoredEvents;
 
+use App\Models\UsesLandlordConnection;
 use Illuminate\Support\Facades\Auth;
 use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent as SpatieEloquentStoredEvent;
 use Spatie\EventSourcing\StoredEvents\StoredEvent;

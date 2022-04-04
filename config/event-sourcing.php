@@ -52,7 +52,7 @@ return [
      * To add extra behaviour you can change this to a class of your own. It should
      * extend the \Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent model.
      */
-    'stored_event_model' => App\Models\EloquentStoredEvent::class,
+    'stored_event_model' => App\Models\StoredEvents\EloquentStoredEvent::class,
 
     /*
      * This class is responsible for storing events. To add extra behaviour you
@@ -73,7 +73,7 @@ return [
      * To add extra behaviour you can change this to a class of your own. It should
      * extend the \Spatie\EventSourcing\Snapshots\EloquentSnapshot model.
      */
-    'snapshot_model' => App\Models\EloquentSnapshot::class,
+    'snapshot_model' => App\Models\StoredEvents\EloquentSnapshot::class,
 
     /*
      * This class is responsible for handling stored events. To add extra behaviour you
