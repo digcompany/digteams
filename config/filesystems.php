@@ -1,5 +1,24 @@
 <?php
 
+$links = [
+    public_path('storage') => storage_path('app/public'),
+];
+
+if (file_exists(public_path('legacy/www'))) {
+    $links = $links + [
+        public_path('legacy/www/assets') => resource_path('legacy/www/assets'),
+        public_path('legacy/www/glyphicons') => resource_path('legacy/www/glyphicons'),
+        public_path('legacy/www/qwoffice/bootstrap') => resource_path('legacy/www/qwoffice/bootstrap'),
+        public_path('legacy/www/qwoffice/css') => resource_path('legacy/www/qwoffice/css'),
+        public_path('legacy/www/qwoffice/fonts') => resource_path('legacy/www/qwoffice/fonts'),
+        public_path('legacy/www/qwoffice/js') => resource_path('legacy/www/qwoffice/js'),
+        public_path('legacy/www/qwoffice/estimates') => resource_path('legacy/www/qwoffice/estimates'),
+        public_path('legacy/www/qwoffice/static') => resource_path('legacy/www/qwoffice/static'),
+        public_path('legacy/www/qwoffice/themes') => resource_path('legacy/www/qwoffice/themes'),
+        public_path('legacy/www/qwoffice/chromeless_35.js') => resource_path('legacy/www/qwoffice/chromeless_35.js'),
+    ];
+}
+
 return [
 
     /*
@@ -69,8 +88,6 @@ return [
     |
     */
 
-    'links' => [
-        public_path('storage') => storage_path('app/public'),
-    ],
+    'links' => $links,
 
 ];

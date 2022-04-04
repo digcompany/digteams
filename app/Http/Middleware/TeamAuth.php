@@ -17,6 +17,7 @@ class TeamAuth
      */
     public function handle(Request $request, Closure $next)
     {
+
         if (isset(app()['team'])) {
             $permittedRoutes = ['create-first-team', 'join-team', 'team-invitations.accept'];
 
@@ -28,12 +29,10 @@ class TeamAuth
                         );
                     }
                 }
-            } elseif ($request->user() &&
-                isset($request->user()->currentTeam->uuid)
-        ) {
-                $team = Team::where('uuid', $request->user()->currentTeam->uuid)->firstOrFail();
-                $team = $team->configure()->use();
             }
+        } elseif ($request->user() && isset($request->user()->currentTeam->uuid)) {
+            $team = Team::where('uuid', $request->user()->currentTeam->uuid)->firstOrFail();
+            $team = $team->configure()->use();
         }
 
         return $next($request);

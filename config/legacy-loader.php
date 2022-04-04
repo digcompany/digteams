@@ -16,5 +16,6 @@ return [
     'middleware' => [
         'web',
         'auth',
+        'team.auth'
     ],
 ];
