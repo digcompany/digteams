@@ -17,7 +17,7 @@ module.exports = {
           title: 'Getting Started',
           collapsable: false,
           children: [
-            ['/getstarted/', 'Install it title'],
+            ['/getstarted/', 'Installation'],
             ['/policies/', 'Policy'],
             ['/todo-roadmap/', 'Roadmap']
           ]
