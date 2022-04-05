@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\UserType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\SuperAdmin>
  */
-class SuperAdminFactory extends Factory
+class SuperAdminFactory extends UserFactory
 {
     /**
      * Define the model's default state.
@@ -16,8 +17,8 @@ class SuperAdminFactory extends Factory
      */
     public function definition()
     {
-        return [
-            //
-        ];
+        return array_merge(parent::definition(), [
+            'type' => UserType::SuperAdmin->value,
+        ]);
     }
 }
