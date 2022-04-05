@@ -13,27 +13,17 @@ enum LinkType: string
     public function prettyName(): string
     {
         switch ($this) {
-            case LinkType::Link:
-                return 'Link';
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // no break
             case LinkType::InternalLink:
                 return 'Local Path (/dashboard)';
-            case LinkType::ExternalLink:
-                return 'URL (http://example.com)';
+            break;
             case LinkType::InternalIframe:
                 return 'Local Path in an Iframe';
+            break;
             case LinkType::ExternalIframe:
                 return 'Full URL in an Iframe';
+            break;
+            default:
+                return 'URL (http://example.com)';
         }
     }
 }
