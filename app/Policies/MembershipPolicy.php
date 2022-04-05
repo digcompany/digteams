@@ -58,7 +58,7 @@ class MembershipPolicy
         $team = Team::findOrFail($membership->team_id);
         $member = User::findOrFail($membership->user_id);
 
-        if($member->type === UserType::SuperAdmin && $user->type !== UserType::SuperAdmin) {
+        if ($member->type === UserType::SuperAdmin && $user->type !== UserType::SuperAdmin) {
             return false;
         }
 

@@ -33,9 +33,10 @@ class UserPolicy
     public function view(User|SuperAdmin $user, User|SuperAdmin $model)
     {
         session()->put('user-' .$model->id, $model->id);
-        if($model->type === UserType::SuperAdmin && $user->type !== UserType::SuperAdmin) {
+        if ($model->type === UserType::SuperAdmin && $user->type !== UserType::SuperAdmin) {
             return false;
         }
+
         return true;
     }
 

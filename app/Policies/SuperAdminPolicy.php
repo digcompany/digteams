@@ -31,9 +31,10 @@ class SuperAdminPolicy
      */
     public function view(User $user, SuperAdmin $superAdmin)
     {
-        if($superAdmin->type === UserType::SuperAdmin && $user->type !== UserType::SuperAdmin) {
+        if ($superAdmin->type === UserType::SuperAdmin && $user->type !== UserType::SuperAdmin) {
             return false;
         }
+
         return true;
     }
 

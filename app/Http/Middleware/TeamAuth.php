@@ -17,7 +17,6 @@ class TeamAuth
      */
     public function handle(Request $request, Closure $next)
     {
-
         if (isset(app()['team'])) {
             $permittedRoutes = ['create-first-team', 'join-team', 'team-invitations.accept'];
 

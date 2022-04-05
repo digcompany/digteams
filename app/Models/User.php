@@ -70,7 +70,7 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-        /**
+    /**
      *
      * case SuperAdmin = 'super_admin';
      * case Admin = 'admin';
