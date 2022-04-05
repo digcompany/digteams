@@ -25,6 +25,7 @@ class UpdateUserTypeForm extends Component
     public function mount()
     {
         $this->state = (Auth::user())->withoutRelations()->toArray();
+        $this->state['user_type'] = (Auth::user())->type;
     }
 
     public function updateUserType(UpdatesUserType $updater)

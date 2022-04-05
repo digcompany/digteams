@@ -27,6 +27,7 @@ class User extends Authenticatable
     use Impersonate;
     use Billable;
     use UsesLandlordConnection;
+    use HasChildren;
 
     /**
      * The attributes that are mass assignable.
@@ -67,6 +68,22 @@ class User extends Authenticatable
      */
     protected $appends = [
         'profile_photo_url',
+    ];
+
+        /**
+     *
+     * case SuperAdmin = 'super_admin';
+     * case Admin = 'admin';
+     * case Organization = 'organization';
+     * case User = 'user';
+     * case Customer = 'customer';
+     * case Guest = 'guest';
+     */
+
+    protected $childTypes = [
+        'user' => User::class,
+        'super_admin' => SuperAdmin::class,
+        'upgraded_user' => UpgradedUser::class,
     ];
 
     public function getAuthIdentifier()

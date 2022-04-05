@@ -8,6 +8,7 @@ return [
         'web',
         'auth',
         'has_team',
+        'team.auth',
     ],
 
     /**

@@ -20,7 +20,7 @@
                     $link)
                     @if(Gate::allows('view', $link))
 
-                    <x-nav-link href="{{ $link->url }}" target="{{ $link->target->value }}" title="{{ $link->title }}">
+                    <x-nav-link href="{{ $link->url }}" :active="requestPathIs($link->url)" target="{{ $link->target->value }}" title="{{ $link->title }}">
                         @isset($link->icon) @svg($link->icon, 'w-4 h-4') @endisset <span class="ml-1">{{ $link->label
                             }}</span>
                     </x-nav-link>

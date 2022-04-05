@@ -6,9 +6,8 @@ use App\Models\SuperAdmin;
 use App\Models\User;
 use App\Models\UserType;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Lab404\Impersonate\Services\ImpersonateManager;
 
-class UserPolicy
+class SuperAdminPolicy
 {
     use HandlesAuthorization;
 
@@ -27,13 +26,12 @@ class UserPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\SuperAdmin  $superAdmin
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User|SuperAdmin $user, User|SuperAdmin $model)
+    public function view(User $user, SuperAdmin $superAdmin)
     {
-        session()->put('user-' .$model->id, $model->id);
-        if($model->type === UserType::SuperAdmin && $user->type !== UserType::SuperAdmin) {
+        if($superAdmin->type === UserType::SuperAdmin && $user->type !== UserType::SuperAdmin) {
             return false;
         }
         return true;
@@ -51,54 +49,25 @@ class UserPolicy
     }
 
     /**
-     * Determine whether the user can create models.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function updateUserType(User $user)
-    {
-        if ($user->isImpersonated()) {
-            $impersonator = app(ImpersonateManager::class)->getImpersonator();
-
-            return $impersonator->type === UserType::SuperAdmin;
-        }
-
-        return false;
-    }
-
-    /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\SuperAdmin  $superAdmin
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, User $model)
+    public function update(User $user, SuperAdmin $superAdmin)
     {
         //
-    }
-
-    /**
-     * Determine whether the user can update the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
-    public function updateTeam(User $user)
-    {
-        return ! $user->isImpersonated();
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\SuperAdmin  $superAdmin
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, User $model)
+    public function delete(User $user, SuperAdmin $superAdmin)
     {
         //
     }
@@ -107,10 +76,10 @@ class UserPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\SuperAdmin  $superAdmin
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, User $model)
+    public function restore(User $user, SuperAdmin $superAdmin)
     {
         //
     }
@@ -119,10 +88,10 @@ class UserPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\SuperAdmin  $superAdmin
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, User $model)
+    public function forceDelete(User $user, SuperAdmin $superAdmin)
     {
         //
     }

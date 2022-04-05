@@ -19,13 +19,14 @@ class ImpersonatedTeam
     public function handle(Request $request, Closure $next)
     {
         if ($request->user() && $request->user()->isImpersonated()) {
-            $impersonator = app(ImpersonateManager::class)->getImpersonator();
+            $impersonator = ($manager = app(ImpersonateManager::class))->getImpersonator();
             $user = request()->user();
             $impersonatorTeam = $impersonator->currentTeam;
             $membership = \App\Charter::membershipInstance($impersonatorTeam, $user);
 
             if (Gate::forUser($impersonator)->denies('impersonate', $membership)) {
-                abort(403);
+                $manager->leave();
+                $this->banner(_('You do not have permission to impersonate this user'), 'danger');
             }
 
             if (! $request->session()->has('impersonated_team_uuid')) {
@@ -39,5 +40,11 @@ class ImpersonatedTeam
         }
 
         return $next($request);
+    }
+
+    public function banner(string $message, string $style = 'success')
+    {
+        session()->flash('flash.banner', $message);
+        session()->flash('flash.bannerStyle', $style);
     }
 }

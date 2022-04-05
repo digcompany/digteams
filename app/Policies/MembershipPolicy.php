@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\Membership;
 use App\Models\Team;
 use App\Models\User;
+use App\Models\UserType;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class MembershipPolicy
@@ -56,6 +57,10 @@ class MembershipPolicy
     {
         $team = Team::findOrFail($membership->team_id);
         $member = User::findOrFail($membership->user_id);
+
+        if($member->type === UserType::SuperAdmin && $user->type !== UserType::SuperAdmin) {
+            return false;
+        }
 
         return $user->ownsTeam($team) ||
         $user->hasTeamRole($team, 'admin') &&
