@@ -12,6 +12,7 @@ enum LinkMenu: string
         switch ($this) {
             case LinkMenu::UserDropdown:
                 return 'Avatar Dropdown';
+
             break;
             default:
                 return 'Navigation Menu';
